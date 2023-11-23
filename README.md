@@ -35,16 +35,16 @@
 
   <p align="center">
     This is the backend for https://github.com/ildebr/ovnis-frontend.
+  </p>
     <br />
     
-    <br />
-    <br />
+    
     <a href="https://github.com/ildebr/ovnis-backend">View Demo</a>
-    ·
+    
     <a href="https://github.com/ildebr/ovnis-backend/issues">Report Bug</a>
-    ·
+    
     <a href="https://github.com/ildebr/ovnis-backend/issues">Request Feature</a>
-  </p>
+  
 </div>
 
 
@@ -147,8 +147,72 @@ You have a list of all the endpoints on ovnis_api/urls.py
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
+## Endpoints
+1. Get all sightings
+   Making a get request to
+   ```sh
+   /api/sightings/
+   ```
+   will return all the sightings available
+2. User creation
+   ```sh
+   /api/user/
+   ```
+   is the endpoint for user creation, it accepts a JSON post request formatted as follows
+   ```json
+   {
+      "email": "something@something.com",
+      "password": "yourpassword"
+   }
+   ```
+3. User authentication
+   ```sh
+   /auth/jwt/create/
+   ```
+   is the endpoint for user login, it receives a JSON post request formatted with the parameters email and password
+   ```json
+   {
+      "email": "something@something.com",
+      "password": "yourpassword"
+   }
+   ```
+   and returns
+   ```json
+     {
+        "access": "youraccess",
+        "refresh": "yourrefresh"
+     }
+   ```
+4. Create a new sighting
+   With the access token added to the authentication headers as 'Bearer ${token}', you can make a post request to
+   ```sh
+   /api/sightings/create/
+   ```
+   with a json request that contains
+   ```json
+   {
+      "title": "",
+      "description": "",
+      "latitude": "",
+      "longitude": ""
+   }
+   ```
+   it will return the sighting created with its id.
+5. Update a sighting
+   You can update an existing sighting if you're the author and make a put request to
+   ```sh
+   /api/sightings/update/<sighting id>
+   ```
+   with a json request that contains
+   ```json
+   {
+      "title": "",
+      "description": "",
+      "latitude": "",
+      "longitude": ""
+   }
+   ```
+   
 <!-- ROADMAP -->
 ## Roadmap
 
