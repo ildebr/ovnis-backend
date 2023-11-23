@@ -18,13 +18,15 @@ from django.urls import path,include
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import MyTokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('ovnis_api.urls', namespace="ovnis_api")), #Raiz de Endpoints del API de consejo
     path('api/user/', include('users.urls', namespace="users")), #Redirecciona a users con el unico endpoint de crear usuario
     path('api-auth/', include('rest_framework.urls', namespace="rest_framework")), 
-    path('auth/jwt/create/', TokenObtainPairView.as_view(), name="token_obtain_pair"), #Endpoint para enviar los datos de un usuario y obtener el token de inicio de sesión
+    # path('auth/jwt/create/', TokenObtainPairView.as_view(), name="token_obtain_pair"), #Endpoint para enviar los datos de un usuario y obtener el token de inicio de sesión
+    path('auth/jwt/create/', MyTokenObtainPairView.as_view(), name="token_obtain_pair"), #Endpoint para enviar los datos de un usuario y obtener el token de inicio de sesión
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'), #Endpoint para refrescar el token
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

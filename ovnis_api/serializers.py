@@ -18,3 +18,17 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('date', 'text', 'sighting', 'user')
+
+class ApiNewSightingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Sighting
+        fields= ('id','title','description', 'latitude', 'longitude')
+        optional_field = ['id',]
+    def create(self, validated_data):
+        user = self.context['user']
+        print(user)
+        sighting = Sighting.objects.create(
+            user=user, 
+            **validated_data
+        )
+        return sighting

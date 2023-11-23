@@ -6,7 +6,13 @@ from django.conf import settings
 import datetime
 # Create your models here.
 
-apikey= "31bb7130af364a82a6b18651213d2dc7"
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
+
+apikey= env('GEOENCODER_API_KEY')
 geocoder = OpenCageGeocode(apikey)
 
 class Sighting(models.Model):
