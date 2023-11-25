@@ -44,6 +44,11 @@ ALLOWED_HOSTS = ['*']
 # ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_HEADERS = [
+    "*",
+]
 
 # Application definition
 
@@ -60,6 +65,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'ovnis_api',
     'users',
+    'django_filters',
     
 ]
 
@@ -220,6 +226,7 @@ REST_FRAMEWORK = {
 #             'rest_framework.authentication.TokenAuthentication',
 #             'rest_framework_simplejwt.authentication.JWTAuthentication',
 #    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 # REST_FRAMEWORK = {

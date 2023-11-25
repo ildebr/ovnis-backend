@@ -17,6 +17,9 @@ from ovnis_api.serializers import SightingSerializer, ApiNewSightingSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 from rest_framework.generics import UpdateAPIView
+
+# filter
+from django_filters.rest_framework import DjangoFilterBackend
 # Create your views here.
 
 
@@ -149,3 +152,11 @@ class updateSighting(UpdateAPIView):
 	def get_queryset(self, *args, **kwargs):
 		return Sighting.objects.filter(user=self.request.user)
 	
+
+class filteredView(generics.ListCreateAPIView):
+    queryset = Sighting.objects.all()
+    serializer_class = SightingSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['continent', 'country', 'date']
+    search_fields = ['title']
+    
